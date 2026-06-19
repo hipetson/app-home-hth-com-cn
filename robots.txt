@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hipetson.github.io/app-home-hth-com-cn/sitemap.xml
