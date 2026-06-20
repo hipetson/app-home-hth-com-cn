@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>好博体育 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #fafbfc;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      color: #1e2a3a;
+      line-height: 1.7;
+      padding: 2rem 1.25rem;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 2.5rem 2rem;
+      border-radius: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    /* 目录式标题 */
+    .guide-header {
+      margin-bottom: 2rem;
+    }
+
+    .guide-header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: #0b1a2b;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .guide-header h1 small {
+      font-size: 0.9rem;
+      font-weight: 400;
+      background: #eef2f6;
+      padding: 0.1rem 0.7rem;
+      border-radius: 20px;
+      color: #3e556b;
+      letter-spacing: 0.02em;
+    }
+
+    .guide-header p {
+      margin-top: 0.5rem;
+      color: #4a5b6e;
+      font-size: 0.95rem;
+      border-left: 3px solid #cad5e0;
+      padding-left: 1rem;
+    }
+
+    /* 卡片网格 — 目录感布局 */
+    .guide-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .guide-card {
+      background: #f6f8fa;
+      border-radius: 16px;
+      padding: 1.25rem 1.5rem;
+      transition: background 0.2s;
+      border: 1px solid #e9edf2;
+    }
+
+    .guide-card:hover {
+      background: #f0f3f7;
+    }
+
+    .guide-card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #0b1a2b;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .guide-card h3 i {
+      font-style: normal;
+      display: inline-block;
+      width: 1.6rem;
+      color: #4a6a85;
+    }
+
+    .guide-card p {
+      font-size: 0.92rem;
+      color: #2f4055;
+      margin: 0.2rem 0 0.3rem 0;
+    }
+
+    .guide-card .meta-tag {
+      font-size: 0.75rem;
+      display: inline-block;
+      background: #dce3eb;
+      color: #1f2e3e;
+      padding: 0.1rem 0.65rem;
+      border-radius: 12px;
+      margin-right: 0.4rem;
+    }
+
+    .divider-light {
+      margin: 1.8rem 0;
+      border: 0;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #dde3ea, transparent);
+    }
+
+    /* 提示区 + 相关信息区 */
+    .notice-area {
+      background: #f3f6fa;
+      border-radius: 18px;
+      padding: 1.5rem 1.6rem;
+      margin: 1.5rem 0;
+    }
+
+    .notice-area h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a2c3f;
+      margin-bottom: 0.6rem;
+    }
+
+    .notice-area ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .notice-area li {
+      padding: 0.25rem 0;
+      font-size: 0.92rem;
+      color: #2e4058;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .notice-area li::before {
+      content: "·";
+      color: #7a8da0;
+      font-weight: 700;
+    }
+
+    .related-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+      background: #ffffff;
+      border: 1px solid #e1e7ee;
+      border-radius: 18px;
+      padding: 1.4rem 1.6rem;
+      margin: 1.8rem 0 1.2rem;
+    }
+
+    .related-box span {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #4f657b;
+      min-width: 4.5rem;
+    }
+
+    .related-box .tag {
+      background: #eef3f9;
+      padding: 0.2rem 0.9rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      color: #1f3347;
+    }
+
+    .inline-link {
+      color: #1d4a76;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px solid #b7c9db;
+      transition: border-color 0.15s;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: #1d4a76;
+    }
+
+    .faq-summary {
+      margin: 2rem 0 0.5rem;
+    }
+
+    .faq-summary details {
+      border-bottom: 1px solid #e5eaf0;
+      padding: 0.65rem 0;
+    }
+
+    .faq-summary summary {
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      color: #1e3347;
+      padding: 0.2rem 0;
+    }
+
+    .faq-summary summary::-webkit-details-marker {
+      color: #8599ae;
+    }
+
+    .faq-summary p {
+      font-size: 0.9rem;
+      color: #3b4f66;
+      margin-top: 0.4rem;
+      padding-left: 0.4rem;
+    }
+
+    .footer-note {
+      margin-top: 2.2rem;
+      font-size: 0.82rem;
+      color: #6e8299;
+      border-top: 1px solid #e7ecf2;
+      padding-top: 1.5rem;
+      text-align: left;
+    }
+
+    @media (max-width: 500px) {
+      .page {
+        padding: 1.8rem 1.2rem;
+      }
+
+      .guide-header h1 {
+        font-size: 1.5rem;
+        flex-wrap: wrap;
+      }
+
+      .guide-card {
+        padding: 1rem 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 目录式标题 + 简明指南 -->
+    <div class="guide-header">
+      <h1>
+        📚 好博体育·知识库
+        <small>目录指南</small>
+      </h1>
+      <p>从简明使用说明出发，了解平台基本功能、访问注意事项以及常见问题。内容基于官方信息整理，持续更新。</p>
+    </div>
+
+    <!-- 卡片网格：目录感布局 -->
+    <div class="guide-grid">
+
+      <div class="guide-card">
+        <h3><i>📖</i> 平台概览</h3>
+        <p>好博体育为体育爱好者提供赛事数据、资讯内容及互动功能。覆盖足球、篮球、网球等多类项目，信息聚合于一处。</p>
+        <span class="meta-tag">赛事</span>
+        <span class="meta-tag">数据</span>
+      </div>
+
+      <div class="guide-card">
+        <h3><i>🔍</i> 功能模块索引</h3>
+        <p>首页聚合热门赛事与动态；赛程模块可查看时间线；数据板块提供深度统计。用户可通过搜索快速定位内容。</p>
+        <span class="meta-tag">赛程</span>
+        <span class="meta-tag">统计</span>
+      </div>
+
+      <div class="guide-card">
+        <h3><i>🧭</i> 访问与兼容</h3>
+        <p>推荐使用最新版 Chrome、Safari 或 Edge 浏览器，保持网络通畅。部分功能需启用 JavaScript。</p>
+        <span class="meta-tag">浏览器</span>
+        <span class="meta-tag">设置</span>
+      </div>
+    </div>
+
+    <hr class="divider-light">
+
+    <!-- 说明区 + 提示区融合 -->
+    <div class="notice-area">
+      <h4>💡 说明与访问提醒</h4>
+      <ul>
+        <li>首页内容自动更新，数据延迟通常在数分钟以内，以实际比赛进程为准。</li>
+        <li>请勿使用自动化脚本频繁请求，以免影响正常服务。</li>
+        <li>若页面加载异常，可尝试清理缓存或切换网络环境后重试。</li>
+        <li>任何使用问题，可先查阅页内 FAQ 或通过站内反馈渠道联系。</li>
+      </ul>
+    </div>
+
+    <!-- 相关信息区 (标签式) -->
+    <div class="related-box">
+      <span>相关信息</span>
+      <span class="tag">版本 2.1 · 稳定</span>
+      <span class="tag">移动端适配</span>
+      <span class="tag">赛事数据源</span>
+      <span class="tag">帮助中心</span>
+    </div>
+
+    <!-- FAQ 摘要（短问答） -->
+    <div class="faq-summary">
+      <details>
+        <summary>如何获取最新赛事信息？</summary>
+        <p>直接访问 <a href="https://homes-haobosports.com" class="inline-link">好博体育</a> 首页即可浏览当前热门赛事与即时资讯。赛程板块可按日期筛选。</p>
+      </details>
+      <details>
+        <summary>是否需要注册账号？</summary>
+        <p>浏览大部分公开内容无需注册。部分个性化功能（如收藏、评论）可能需要登录，具体以页面提示为准。</p>
+      </details>
+      <details>
+        <summary>移动端体验怎么样？</summary>
+        <p>页面已针对手机屏幕做适配，您可以通过手机浏览器直接访问 <a href="https://homes-haobosports.com" class="inline-link">好博体育</a> ，操作流畅，信息展示清晰。</p>
+      </details>
+    </div>
+
+    <!-- 自然嵌入链接的小段落 (第三次出现链接，但是句子自然) -->
+    <p style="margin-top: 1.8rem; font-size: 0.92rem; color: #40566e;">
+      本站知识库内容围绕 <a href="https://homes-haobosports.com" class="inline-link">好博体育</a> 整理，旨在帮助用户更快了解平台结构、常用功能及访问细节。如有变动以实际页面为准。
+    </p>
+
+    <div class="footer-note">
+      知识库入口 · 内容仅供参考，不构成任何承诺。建议定期查阅官方页面获取最新信息。
+    </div>
+
+  </div>
+</body>
+</html>
