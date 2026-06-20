@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>竞技宝 · 知识库入口</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      background: #f0f6f9;
+      color: #1b2a32;
+      line-height: 1.6;
+      padding: 24px 16px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 1100px;
+      width: 100%;
+    }
+
+    /* ---- 顶部提示 ---- */
+    .reminder-strip {
+      background: #d0e7ee;
+      border-radius: 40px;
+      padding: 10px 22px;
+      margin-bottom: 32px;
+      display: inline-block;
+      font-size: 0.9rem;
+      color: #1d4a5c;
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 6px rgba(30, 80, 90, 0.05);
+    }
+
+    .reminder-strip span {
+      font-weight: 500;
+    }
+
+    /* ---- Hero 区域 ---- */
+    .hero {
+      margin-bottom: 40px;
+      padding: 20px 0 16px 0;
+      border-bottom: 2px solid #b9d5df;
+    }
+
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: #0b3b4a;
+      line-height: 1.2;
+    }
+
+    .hero h1 small {
+      font-weight: 400;
+      font-size: 1.1rem;
+      color: #3f6d7a;
+      display: block;
+      margin-top: 6px;
+    }
+
+    .hero p {
+      margin-top: 16px;
+      font-size: 1.05rem;
+      color: #1e4b58;
+      max-width: 680px;
+    }
+
+    /* ---- 目录感网格卡片 ---- */
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin: 40px 0;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 24px 20px 28px;
+      box-shadow: 0 8px 18px rgba(30, 70, 80, 0.06);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid #daeaf0;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(20, 80, 90, 0.08);
+    }
+
+    .card .icon {
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      display: inline-block;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #0c4353;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #2c4d59;
+      margin-bottom: 6px;
+    }
+
+    .card .tag {
+      display: inline-block;
+      background: #e1f0f5;
+      color: #115a6b;
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 2px 12px;
+      border-radius: 30px;
+      margin-top: 8px;
+    }
+
+    /* ---- 说明区 / 承接段落 ---- */
+    .info-section {
+      background: #e7f2f7;
+      border-radius: 28px;
+      padding: 28px 28px 32px;
+      margin: 36px 0 28px;
+    }
+
+    .info-section h2 {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #093d4b;
+      margin-bottom: 14px;
+    }
+
+    .info-section p {
+      margin-bottom: 14px;
+      color: #1a4858;
+    }
+
+    .info-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ---- 提示区 ---- */
+    .tip-area {
+      background: #daeef5;
+      border-left: 6px solid #208094;
+      padding: 20px 24px;
+      border-radius: 24px;
+      margin: 32px 0;
+    }
+
+    .tip-area .tip-title {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #074353;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+
+    .tip-area p {
+      color: #1a4e5c;
+    }
+
+    /* ---- 相关信息区 (知识库入口) ---- */
+    .related-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px 30px;
+      background: #ffffffd6;
+      backdrop-filter: blur(2px);
+      border-radius: 30px;
+      padding: 26px 28px;
+      margin-top: 28px;
+      border: 1px solid #c7dee8;
+    }
+
+    .related-links .rel-item {
+      flex: 1 1 180px;
+    }
+
+    .related-links .rel-item .label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #3e7b8a;
+      font-weight: 500;
+    }
+
+    .related-links .rel-item a {
+      color: #0e5f72;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1px dotted #7fb3c2;
+    }
+
+    .related-links .rel-item a:hover {
+      color: #043543;
+      border-bottom: 1px solid #043543;
+    }
+
+    /* ---- FAQ 摘要 ---- */
+    .faq-mini {
+      margin: 40px 0 20px;
+    }
+
+    .faq-mini details {
+      background: #f5fafc;
+      border-radius: 20px;
+      padding: 14px 20px;
+      margin-bottom: 10px;
+      border: 1px solid #cfe2eb;
+      transition: background 0.1s;
+    }
+
+    .faq-mini details[open] {
+      background: #e3f0f5;
+    }
+
+    .faq-mini summary {
+      font-weight: 600;
+      color: #074353;
+      cursor: pointer;
+      padding: 4px 0;
+    }
+
+    .faq-mini details p {
+      margin-top: 10px;
+      color: #1d4e5c;
+      font-size: 0.95rem;
+    }
+
+    /* ---- 底部 ---- */
+    .footer-note {
+      margin-top: 40px;
+      padding: 16px 0 10px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #397582;
+      border-top: 1px solid #c4dae4;
+    }
+
+    /* ---- 移动端适应 ---- */
+    @media (max-width: 600px) {
+      body { padding: 16px 12px; }
+      .hero h1 { font-size: 1.7rem; }
+      .hero h1 small { font-size: 1rem; }
+      .grid-cards { grid-template-columns: 1fr; gap: 16px; }
+      .info-section { padding: 20px 18px; }
+      .related-links { padding: 20px 18px; flex-direction: column; gap: 14px; }
+      .tip-area { padding: 16px 18px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 再次访问提示 -->
+  <div class="reminder-strip">
+    <span>📌 再次回来 · 知识常新</span> — 把这里当作你的索引起点
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>
+      竞技宝
+      <small>知识库入口 · 持续关注的索引</small>
+    </h1>
+    <p>
+      如果你是再次访问，或者打算将这里收藏以便日后快速查阅，那么这一页就是为你准备的目录。 
+      从背景说明到常见问题，从相关资源到使用备忘，我们把它整理成卡片与提示，方便你按需定位。
+    </p>
+  </div>
+
+  <!-- 网格卡片（目录感） -->
+  <div class="grid-cards">
+    <div class="card">
+      <div class="icon">📘</div>
+      <h3>平台背景</h3>
+      <p>了解竞技宝所依托的服务定位与知识体系，适合新老用户回顾基础信息。</p>
+      <span class="tag">入门</span>
+    </div>
+    <div class="card">
+      <div class="icon">📌</div>
+      <h3>常用路径</h3>
+      <p>从资料查询到功能指引，汇总反复被问及的操作方向，减少再次查找的时间。</p>
+      <span class="tag">收藏向</span>
+    </div>
+    <div class="card">
+      <div class="icon">🧩</div>
+      <h3>场景速览</h3>
+      <p>不同使用意图下的内容模块：信息核对、规则理解、版本更新备忘等。</p>
+      <span class="tag">索引</span>
+    </div>
+    <div class="card">
+      <div class="icon">🔁</div>
+      <h3>持续关注</h3>
+      <p>如果你计划定期回访，可留意相关区域的动态说明，保持信息同步。</p>
+      <span class="tag">习惯</span>
+    </div>
+  </div>
+
+  <!-- 说明区（承接上文：再次访问 + 收藏角度） -->
+  <div class="info-section">
+    <h2>为什么需要这样一个入口页？</h2>
+    <p>
+      当你再次打开一个网站，最理想的体验是快速定位到上次关注的区域，或是直接找到新内容。本页正是从“再次访问”与“收藏”的角度出发，把分散的知识点整理为卡片、提示和链接集合。
+    </p>
+    <p>
+      无论是想回顾之前的说明，还是想检查是否有新增的信息，你都可以从这里起步。在下方提示区与相关信息区中，我们进一步补充了常见备忘与延伸资源，帮助你在不同使用场景下都能找到对应线索。
+    </p>
+  </div>
+
+  <!-- 提示区 -->
+  <div class="tip-area">
+    <div class="tip-title">💡 提示 · 保持关注节奏</div>
+    <p>
+      如果你希望定期了解 <a href="https://zh-han-jingjibao.com" style="color: #043d4b; text-decoration: underline; text-underline-offset: 3px; font-weight: 500;">竞技宝</a> 的更新或知识变化，建议将此页加入浏览器书签。再次访问时，可以首先浏览卡片区域与提示区，快速判断是否有新的内容需要阅读。
+    </p>
+  </div>
+
+  <!-- 相关信息区（知识库入口） -->
+  <div class="related-links">
+    <div class="rel-item">
+      <div class="label">📎 核心链接</div>
+      <a href="https://zh-han-jingjibao.com">竞技宝</a> <span style="color: #3d7685;">· 知识库首页</span>
+    </div>
+    <div class="rel-item">
+      <div class="label">📚 相关阅读</div>
+      <span style="color: #0f5669;">常见说明 · 版本记录</span>
+    </div>
+    <div class="rel-item">
+      <div class="label">🧭 收藏用</div>
+      <span style="color: #0f5669;">本页即可作为入口</span>
+    </div>
+  </div>
+
+  <!-- FAQ 摘要（精简） -->
+  <div class="faq-mini">
+    <details>
+      <summary>再次访问时，我应该先看哪里？</summary>
+      <p>建议先扫一遍卡片区域，它们概括了主要知识模块。然后可以查看提示区与相关信息区，确认是否有新增或变动的内容。</p>
+    </details>
+    <details>
+      <summary>收藏这个页面能获得什么？</summary>
+      <p>收藏后，你拥有一个稳定的索引起点。所有指向 <a href="https://zh-han-jingjibao.com" style="color: #0b5265; text-decoration: underline;">竞技宝</a> 的核心说明、提示与相关链接都会保持更新，方便你持续跟进。</p>
+    </details>
+    <details>
+      <summary>与其他入口页有什么不同？</summary>
+      <p>本页更强调“再次回来”的场景，布局偏向知识库目录，并且在视觉上使用了蓝绿色网格卡片与提示区块，让信息层级更清晰。</p>
+    </details>
+  </div>
+
+  <!-- 底部 -->
+  <div class="footer-note">
+    <span>知识库入口 · 可收藏 · 内容持续梳理</span>
+  </div>
+
+</div>
+</body>
+</html>
