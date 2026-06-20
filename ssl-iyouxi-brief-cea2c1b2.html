@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱游戏 · 再发现与收藏</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: linear-gradient(145deg, #fce8d5 0%, #f5d7c2 40%, #f0ceb4 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1.5rem;
+            line-height: 1.6;
+            color: #3d2c22;
+        }
+
+        .container {
+            max-width: 960px;
+            width: 100%;
+            background: rgba(255, 252, 248, 0.8);
+            backdrop-filter: blur(2px);
+            border-radius: 48px 48px 32px 32px;
+            box-shadow: 0 20px 40px -12px rgba(100, 60, 30, 0.3), 0 8px 16px rgba(255, 235, 215, 0.3);
+            padding: 2.5rem 2rem;
+            transition: all 0.2s ease;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 1.8rem 1rem;
+                border-radius: 32px;
+            }
+        }
+
+        /* 主视觉 — 书签与收藏意象 */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.8rem;
+            position: relative;
+        }
+
+        .hero-icon {
+            font-size: 3.6rem;
+            display: inline-block;
+            background: linear-gradient(135deg, #f9d7b0, #edc096);
+            padding: 0.8rem 1.5rem 0.6rem 1.5rem;
+            border-radius: 100px;
+            margin-bottom: 1.2rem;
+            box-shadow: 0 6px 14px rgba(180, 110, 60, 0.15);
+            line-height: 1;
+            letter-spacing: 2px;
+            color: #5f3e2b;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 520;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #5f3e2b, #8b5e3c);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #5a4234;
+            max-width: 640px;
+            margin: 0.5rem auto 0;
+            border-bottom: 1px dashed #dbba9f;
+            padding-bottom: 1.2rem;
+        }
+
+        /* 信息卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.6rem;
+            margin: 2.2rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 28px;
+            padding: 1.8rem 1.5rem;
+            box-shadow: 0 8px 22px rgba(140, 90, 60, 0.08);
+            transition: transform 0.15s, box-shadow 0.2s;
+            border: 1px solid rgba(255, 235, 215, 0.6);
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px -8px rgba(120, 75, 45, 0.18);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            font-weight: 540;
+            margin-bottom: 0.6rem;
+            color: #4a3426;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card p {
+            color: #4f3b2e;
+            font-size: 0.97rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #f1e2d6;
+            color: #4f3422;
+            padding: 0.2rem 0.9rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            margin-top: 0.6rem;
+            letter-spacing: 0.3px;
+        }
+
+        .card-slim {
+            background: white;
+            border-radius: 28px;
+            padding: 1.5rem 1.8rem;
+            box-shadow: 0 8px 22px rgba(140, 90, 60, 0.08);
+            border: 1px solid rgba(255, 235, 215, 0.6);
+            margin: 1.6rem 0;
+        }
+
+        .card-slim h3 {
+            font-size: 1.3rem;
+            font-weight: 540;
+            margin-bottom: 0.8rem;
+            color: #4a3426;
+        }
+
+        .card-slim p {
+            color: #4f3b2e;
+        }
+
+        .link-sentence {
+            background: white;
+            border-radius: 40px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0 1.2rem;
+            box-shadow: 0 6px 18px rgba(130, 80, 50, 0.06);
+            border: 1px solid #f3e1d2;
+            font-size: 1.06rem;
+        }
+
+        .link-sentence a {
+            display: inline-block;
+            background: #cdaa8a;
+            color: #2b1e15;
+            font-weight: 520;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.1s;
+            border: 1px solid #b78d6e;
+            margin: 0 2px;
+            white-space: nowrap;
+        }
+
+        .link-sentence a:hover {
+            background: #dbb69b;
+            transform: scale(1.02);
+            border-color: #a77c5e;
+        }
+
+        .faq-mini {
+            background: rgba(255, 242, 232, 0.5);
+            border-radius: 36px;
+            padding: 1.5rem 1.8rem;
+            margin-top: 2.2rem;
+            border: 1px solid #e9d2bf;
+        }
+
+        .faq-mini details {
+            margin-bottom: 0.6rem;
+            cursor: pointer;
+        }
+
+        .faq-mini summary {
+            font-weight: 510;
+            color: #4b3527;
+            padding: 0.4rem 0;
+            list-style: '📌 ';
+        }
+
+        .faq-mini details[open] summary {
+            list-style: '📎 ';
+        }
+
+        .faq-mini p {
+            padding-left: 1.8rem;
+            color: #514034;
+            font-size: 0.95rem;
+            margin-top: 0.3rem;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2.5rem;
+            font-size: 0.9rem;
+            color: #7a5f4b;
+            border-top: 1px solid #eddccd;
+            padding-top: 1.5rem;
+            letter-spacing: 0.2px;
+        }
+
+        .footer-note a {
+            color: #5f3e2b;
+            text-decoration: underline wavy #c9a88b 1px;
+            text-underline-offset: 3px;
+        }
+
+        .emoji-bullet {
+            display: inline-block;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- 主视觉：收藏与回访 -->
+        <div class="hero">
+            <div class="hero-icon">🔖 ✦ 锚点</div>
+            <h1>再次找到这里</h1>
+            <p>收藏夹里的位置 · 持续关注的起点</p>
+        </div>
+
+        <!-- 信息卡片网格 用途 + 人群 -->
+        <div class="card-grid">
+            <div class="card">
+                <h3><span class="emoji-bullet">🗂️</span> 常用入口</h3>
+                <p>把感兴趣的页面保留在书签栏，每次需要时直接定位，不必重新搜索。适合作为游戏资讯、工具或社区的一个固定参照点。</p>
+                <span class="tag">快速回溯</span>
+            </div>
+            <div class="card">
+                <h3><span class="emoji-bullet">🧭</span> 发现与筛选</h3>
+                <p>网站内容经过一定积累后，常看常新。如果偏好特定类型或风格，持续关注能帮你更高效地获取合口味的推荐。</p>
+                <span class="tag">内容沉淀</span>
+            </div>
+            <div class="card">
+                <h3><span class="emoji-bullet">👥</span> 适合人群</h3>
+                <p>喜欢定期浏览游戏动态的玩家、寻找特定题材的爱好者、以及希望保持一个干净入口的轻度用户。不需要频繁注册，打开即用。</p>
+                <span class="tag">轻量访问</span>
+            </div>
+        </div>
+
+        <!-- 自然链接段落（严格符合「爱游戏」可见文本） -->
+        <div class="link-sentence">
+            <p>如果你之前访问过 <a href="https://ssl-iyouxi.com">爱游戏</a> 并觉得内容有参考价值，不妨将它添加到浏览器书签，方便之后再次回来浏览。保持一个稳定的访问习惯，也能更早注意到站内更新或变化。</p>
+        </div>
+
+        <!-- 特点 + 场景 混合卡片 -->
+        <div class="card-slim">
+            <h3>📋 持续关注的理由</h3>
+            <p>信息类网站的价值往往建立在长期使用之上。当你对某个站点的内容风格、更新节奏有了基本了解，后续的每次访问都会更省力，也更容易找到符合自己预期的内容。无论是查看新上线的专题，还是回顾之前的条目，一个固定的入口都能减少跳转成本。</p>
+            <p style="margin-top: 0.8rem;">对于游戏领域来说，话题和活动常有周期，偶尔想起时回来逛逛，往往会有新的发现。不必给自己太大压力，保持一个轻松的访问节奏就好。</p>
+        </div>
+
+        <!-- FAQ 摘要 用 details 实现 -->
+        <div class="faq-mini">
+            <h3 style="font-weight: 540; color:#4a3426; margin-bottom: 0.6rem;">❓ 你可能想问</h3>
+            <details>
+                <summary>这个网站主要是关于什么的？</summary>
+                <p><a href="https://ssl-iyouxi.com">爱游戏</a> 是一个以游戏为主题的内容站点，涵盖资讯、推荐、杂谈等方向，适合对游戏有兴趣的浏览者。具体内容随运营阶段会有所调整，建议直接访问了解最新面貌。</p>
+            </details>
+            <details>
+                <summary>为什么值得再次访问？</summary>
+                <p>网站会不定时更新新的文章或整理专题，如果你对某个栏目或系列感兴趣，隔一段时间再回来，很可能看到不一样的内容。收藏之后也更容易在需要时找到。</p>
+            </details>
+            <details>
+                <summary>如何不错过更新？</summary>
+                <p>最直接的方式就是偶尔主动访问，或者利用浏览器的书签功能做一个简单的提醒。保持自然频率即可，无需过度关注。</p>
+            </details>
+        </div>
+
+        <!-- 结尾 / 再次提示收藏 -->
+        <div class="footer-note">
+            <p>✧ 把 <a href="https://ssl-iyouxi.com">爱游戏</a> 放在书签栏，下次回来更顺手 ✧</p>
+            <p style="margin-top: 0.6rem; font-size:0.85rem; opacity:0.7;">页面仅作介绍，实际内容以网站为准</p>
+        </div>
+
+    </div>
+</body>
+</html>
